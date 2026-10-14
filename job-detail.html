@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job Details | Govt Jobs PK</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: { pakGreen: '#01411C', pakGreenHover: '#002f13', pakGold: '#D4AF37' },
+                    fontFamily: { sans: ['Inter', 'sans-serif'] }
+                }
+            }
+        }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-gray-50 flex flex-col min-h-screen text-gray-800">
+
+    <header class="sticky top-0 z-50 bg-white shadow-md border-b-2 border-pakGold">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-20">
+            <a href="index.html" class="flex items-center space-x-3">
+                <div class="w-12 h-12 bg-pakGreen rounded-full flex items-center justify-center text-pakGold shadow-md border-2 border-pakGold">
+                    <i class="fa-solid fa-star-and-crescent text-2xl"></i>
+                </div>
+                <div>
+                    <span class="text-xl md:text-2xl font-extrabold text-pakGreen tracking-tight block leading-tight">GOVT JOBS & SCHEMES <span class="text-pakGold">PK</span></span>
+                    <span class="text-[10px] text-gray-500 font-medium tracking-wider uppercase block">Official Verified Information Portal</span>
+                </div>
+            </a>
+            <nav class="hidden xl:flex space-x-1 font-semibold text-sm">
+                <a href="index.html" class="px-3 py-2 text-gray-700 hover:text-pakGreen hover:bg-emerald-50 rounded-md transition">Home</a>
+                <a href="govt-jobs.html" class="px-3 py-2 text-gray-700 hover:text-pakGreen hover:bg-emerald-50 rounded-md transition">Govt Jobs</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="max-w-4xl mx-auto px-4 py-10 flex-grow w-full">
+        <div id="job-detail-content" class="bg-white rounded-2xl shadow-lg border border-gray-200 p-6 sm:p-10 space-y-6">
+            <div class="text-center py-12 text-gray-500">
+                <i class="fa-solid fa-spinner fa-spin text-3xl mb-2 text-pakGreen"></i>
+                <p>Loading verified job details...</p>
+            </div>
+        </div>
+    </main>
+
+    <footer class="bg-slate-900 text-gray-300 pt-12 pb-8 border-t-2 border-pakGold mt-auto">
+        <div class="max-w-7xl mx-auto px-4 text-center text-xs text-gray-500">
+            <p>&copy; 2026 Govt Jobs & Schemes PK. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const jobId = urlParams.get('id');
+
+        fetch('jobs.json')
+            .then(response => response.json())
+            .then(jobs => {
+                const job = jobs.find(j => j.id === jobId);
+                const container = document.getElementById('job-detail-content');
+
+                if (!job) {
+                    container.innerHTML = `
+                        <div class="text-center py-12">
+                            <h2 class="text-2xl font-bold text-red-600 mb-2">Job Listing Not Found</h2>
+                            <p class="text-gray-600 text-sm mb-4">The job posting you are looking for might have expired.</p>
+                            <a href="index.html" class="bg-pakGreen text-white px-5 py-2.5 rounded-lg text-xs font-bold">Return to Homepage</a>
+                        </div>
+                    `;
+                    return;
+                }
+
+                document.title = `${job.title} | Govt Jobs PK`;
+                
+                container.innerHTML = `
+                    <div class="flex items-center gap-2 text-xs font-bold text-pakGreen uppercase tracking-wider">
+                        <i class="fa-solid fa-folder-open text-pakGold"></i> ${job.category}
+                    </div>
+                    <h1 class="text-2xl sm:text-3xl font-extrabold text-gray-900">${job.title}</h1>
+                    
+                    <div class="relative h-64 sm:h-80 w-full rounded-xl overflow-hidden shadow-md">
+                        <img src="${job.image}" alt="${job.title}" class="w-full h-full object-cover">
+                    </div>
+
+                    <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 bg-emerald-50 p-4 rounded-xl border border-emerald-200 text-xs font-semibold">
+                        <div><strong>Department:</strong><br><span class="text-gray-700">${job.department}</span></div>
+                        <div><strong>Scale:</strong><br><span class="text-gray-700">${job.scale}</span></div>
+                        <div><strong>Qualification:</strong><br><span class="text-gray-700">${job.education}</span></div>
+                        <div><strong>Last Date:</strong><br><span class="text-red-600">${job.lastDate}</span></div>
+                    </div>
+
+                    <div class="space-y-3 text-sm text-gray-700 leading-relaxed">
+                        <h3 class="text-base font-bold text-pakGreen border-b pb-2">Job Description & Requirements</h3>
+                        <p>${job.description}</p>
+                    </div>
+
+                    <div class="pt-4 border-t flex flex-wrap gap-3">
+                        <a href="index.html" class="bg-pakGreen hover:bg-pakGreenHover text-white font-bold px-6 py-3 rounded-xl text-xs sm:text-sm transition flex items-center gap-2 shadow">
+                            <i class="fa-solid fa-arrow-left text-pakGold"></i> Back to Home
+                        </a>
+                    </div>
+                `;
+            });
+    </script>
+</body>
+</html>

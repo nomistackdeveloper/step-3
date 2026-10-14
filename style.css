@@ -1,0 +1,97 @@
+/* ==========================================================
+   Govt Jobs & Schemes PK - Shared Stylesheet (style.css)
+   ========================================================== */
+
+body { 
+    font-family: 'Inter', sans-serif; 
+    background-color: #F4F6F8; 
+    color: #1f2937; 
+    top: 0px !important;
+    position: static !important;
+}
+
+.adsense-placeholder {
+    background: repeating-linear-gradient(45deg, #f3f4f6, #f3f4f6 10px, #e5e7eb 10px, #e5e7eb 20px);
+    border: 1px dashed #9ca3af;
+}
+
+.green-gradient {
+    background: linear-gradient(135deg, #01411C 0%, #002711 100%);
+}
+
+.gold-badge {
+    background-color: #D4AF37;
+    color: #01411C;
+}
+
+/* --- Complete Google Translate Bar Hide --- */
+.goog-te-banner-frame,
+iframe.goog-te-banner-frame,
+.goog-te-banner,
+.VIpgJd-yD3FA-pjLVth { 
+    display: none !important; 
+    visibility: hidden !important;
+}
+
+#google_translate_element { 
+    position: absolute;
+    left: -9999px;
+    top: -9999px;
+    visibility: hidden;
+}
+
+.goog-text-highlight {
+    background-color: transparent !important;
+    box-shadow: none !important;
+}
+
+/* Language Button Styling */
+.lang-btn-en {
+    background-color: #f0fdf4;
+    border: 1.5px solid #d4af37;
+    color: #01411c;
+    border-radius: 12px;
+    font-weight: 700;
+}
+.lang-btn-en:hover {
+    background-color: #e6f9ed;
+}
+
+.lang-btn-ur {
+    background-color: #01411c;
+    border: 1.5px solid #d4af37;
+    color: #ffffff;
+    border-radius: 12px;
+    font-weight: 700;
+}
+.lang-btn-ur:hover {
+    background-color: #002f13;
+}
+/* ==========================================================
+   Completely Hide Google Translate Banner & Notifications
+   ========================================================== */
+
+.goog-te-banner-frame,
+iframe.goog-te-banner-frame,
+.goog-te-banner,
+.VIpgJd-yD3FA-pjLVth,
+#goog-gt-tt,
+.goog-te-balloon-frame {
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+    height: 0 !important;
+    width: 0 !important;
+}
+
+body {
+    top: 0px !important;
+    position: static !important;
+}
+
+/* Hide Google's default translation highlight tooltips */
+.goog-text-highlight {
+    background-color: transparent !important;
+    box-shadow: none !important;
+}
